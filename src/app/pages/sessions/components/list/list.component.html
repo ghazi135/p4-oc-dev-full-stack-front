@@ -1,0 +1,62 @@
+<div class="list">
+  <mat-card>
+    <mat-card-header fxLayout="row" fxLayoutAlign="space-between center">
+      <mat-card-title class="m0">Rentals available</mat-card-title>
+
+      @if (user?.admin) {
+      <button mat-raised-button color="primary" routerLink="create">
+        <mat-icon>add</mat-icon>
+        <span class="ml1">Create</span>
+      </button>
+      }
+    </mat-card-header>
+
+    <div class="items mt2" fxLayout="row wrap" fxLayout.lt-md="column">
+      @for (session of sessions$ | async; track session.id) {
+      <mat-card class="item" fxFlex>
+        <mat-card-header>
+          <mat-card-title>{{ session.name }}</mat-card-title>
+          <mat-card-subtitle>
+            Session on {{ session.date | date : "longDate" }}
+          </mat-card-subtitle>
+        </mat-card-header>
+        <div mat-card-image fxLayoutAlign="center center">
+          <img
+            class="picture"
+            src="../../../../../assets/sessions.png"
+            alt="Yoga session"
+          />
+        </div>
+        <mat-card-content>
+          <p>
+            {{ session.description }}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-raised-button
+            color="primary"
+            [routerLink]="['detail', session.id]"
+          >
+            <mat-icon>search</mat-icon>
+            <span class="ml1">Detail</span>
+          </button>
+
+          @if (user?.admin) {
+          <button
+            mat-raised-button
+            color="primary"
+            [routerLink]="['update', session.id]"
+          >
+            <mat-icon>edit</mat-icon>
+            <span class="ml1">Edit</span>
+          </button>
+          }
+        </mat-card-actions>
+      </mat-card>
+      } @empty {
+      <p>No sessions available.</p>
+      }
+    </div>
+  </mat-card>
+</div>
