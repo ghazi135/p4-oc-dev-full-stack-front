@@ -1,0 +1,15 @@
+{
+  "temp-dir": ".nyc_output",
+  "report-dir": "coverage/cypress",
+  "reporter": ["lcov", "html", "text-summary"],
+  "include": ["src/app/**/*.ts"],
+  "exclude": [
+    "**/*.spec.ts",
+    "**/*.e2e.ts",
+    "src/main.ts",
+    "src/polyfills.ts",
+    "src/environments/**"
+  ],
+  "extension": [".ts"],
+  "all": true
+}
